@@ -12,7 +12,6 @@ public class PlayerMovement : MonoBehaviour
 
 
     public GameObject Door;
-    private int coinCount = 0;
     public float jumpVelocity;
     public float moveSpeed;
 
@@ -33,10 +32,12 @@ public class PlayerMovement : MonoBehaviour
         }
         HandleMovement();
         WallColision();
-        if(coinCount == 16)
+
+        if(GameObject.FindGameObjectsWithTag("Coin").Length == 0)
         {
             Door.SetActive(true);
         }
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Application.Quit();
@@ -86,7 +87,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (triggerCollider.tag == "Coin")
         {
-            coinCount++;
             Destroy(triggerCollider.gameObject);
         }
         if (triggerCollider.tag == "Door")
